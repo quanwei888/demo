@@ -1,4 +1,4 @@
 package com.lucky.demo.data;
 
-public class User {
+public class Book {
 }

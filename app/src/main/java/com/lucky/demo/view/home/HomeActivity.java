@@ -1,4 +1,4 @@
-package com.lucky.demo.home;
+package com.lucky.demo.view.home;
 
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.lucky.demo.R;
-import com.lucky.demo.data.UserState;
 
 public class HomeActivity extends AppCompatActivity implements HomeContract.View{
     HomeContract.Presenter mPresenter;
@@ -23,17 +22,10 @@ public class HomeActivity extends AppCompatActivity implements HomeContract.View
         mReadDaysView = (TextView)findViewById(R.id.readDays);
 
         mPresenter = new HomePresenter(this);
-        mPresenter.loadUserState();
+        mPresenter.getsUserState();
     }
 
     @Override
-    public void showUserState(UserState state) {
-        mBookNameView.setText(state.bookName);
-        mReadDaysView.setText(String.valueOf(state.readDays));
-    }
-
-    @Override
-    public Context context() {
-        return getBaseContext();
+    public void showUserState(HomeData data) {
     }
 }
