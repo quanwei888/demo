@@ -1,5 +1,7 @@
 package com.lucky.demo.view.card;
 
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -29,6 +31,12 @@ public class CardActivity extends AppCompatActivity {
         Button button=(Button)findViewById(R.id.button2);
         mWordView=(View)findViewById(R.id.wordView);
 
+        if(savedInstanceState == null) {
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            Fragment mCardFragment = CardFragment.newInstance(null);
+            transaction.replace(R.id.contentFragment,mCardFragment);
+            transaction.commit();
+        }
         button.setOnClickListener(new View.OnClickListener() { @Override
         public void onClick(View view) {
             ViewGroup.MarginLayoutParams p = (ViewGroup.MarginLayoutParams) mWordView.getLayoutParams();
