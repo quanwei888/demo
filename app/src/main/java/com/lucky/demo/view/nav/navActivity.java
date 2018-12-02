@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 
 import com.lucky.demo.R;
+import com.lucky.demo.view.booklist.BookListActivity;
 import com.lucky.demo.view.card.CardActivity;
 import com.lucky.demo.view.main.MainActivity;
 import com.lucky.demo.view.wordlist.WordListActivity;
@@ -25,7 +26,7 @@ public class navActivity extends AppCompatActivity {
         findViewById(R.id.wordlist).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(v.getContext(), WordListActivity.class));
+                startActivity(new Intent(v.getContext(), BookListActivity.class));
             }
         });
         findViewById(R.id.main).setOnClickListener(new View.OnClickListener() {

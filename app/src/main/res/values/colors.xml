@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorStatusBarBackGround">#339999</color>
-    <color name="colorToolBarBackGround">#339999</color>
-    <color name="colorToolBarColor">#FFFFFF</color>
+    <color name="colorStatusBarBackGround">#FFFFFF</color>
+    <color name="colorToolBarBackGround">#FFFFFF</color>
+    <color name="colorToolBarColor">#494F5D</color>
 
     <color name="colorBackGround">#FFFFFF</color>
     <color name="colorPrimary">#000000</color>

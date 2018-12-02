@@ -92,6 +92,9 @@ public interface RoomDao {
     @Delete
     void deleteBookWords(BookWord... bookWords);
 
+    @Query("SELECT COUNT(1) FROM BookWord INNER JOIN UserWord on BookWord.word=UserWord.word WHERE tag=:tag")
+    int getBookWordsCount(int tag);
+
     /********UserWord***/
     @Insert
     void insertUserWords(UserWord... userWords);
@@ -101,4 +104,8 @@ public interface RoomDao {
 
     @Delete
     void deleteUserWords(UserWord... userWords);
+
+
+    @Query("SELECT COUNT(1) FROM UserWord WHERE tag=:tag")
+    int getUserWordsCount(int tag);
 }

@@ -19,8 +19,7 @@ public class RoomEntity {
         @NonNull
         public int userId;
         public String name;
-
-
+        public String headPic;
         public int bookId = 0;
 
     }
@@ -78,6 +77,9 @@ public class RoomEntity {
 
     @Entity(tableName = "UserWord")
     public static class UserWord {
+        public static final int TAG_DOING = 1;
+        public static final int TAG_DONE = 2;
+
         @PrimaryKey(autoGenerate = true)
         @NonNull
         public int id;

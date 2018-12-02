@@ -1,9 +1,14 @@
 package com.lucky.demo.view.main;
 
+import com.lucky.demo.data.room.RoomDao;
 import com.lucky.demo.data.room.RoomEntity.*;
 import com.lucky.demo.data.source.DataSource;
+import com.lucky.demo.util.AppExecutors;
 import com.lucky.demo.util.Session;
 import com.lucky.demo.view.main.MainContract.*;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import io.reactivex.annotations.NonNull;
 
@@ -12,61 +17,52 @@ import io.reactivex.annotations.NonNull;
  */
 
 public class MainPresenter implements Presenter {
-    View view;
-    DataSource ds;
+    final View view;
+    RoomDao dao;
+    AppExecutors appExecutors;
 
-    public MainPresenter(@NonNull DataSource ds, View view) {
-        this.ds = ds;
+    public MainPresenter(AppExecutors appExecutors, @NonNull RoomDao dao, View view) {
+        this.appExecutors = appExecutors;
+        this.dao = dao;
         this.view = view;
     }
 
     @Override
     public void start() {
+        Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                view.onInitDataSuccess(initData());
+            }
+        };
 
+        appExecutors.diskIO().execute(runnable);
     }
 
-    @Override
-    public void login() {
+    Map<String, Object> initData() {
+        Map<String, Object> data = new HashMap<String, Object>();
         if (Session.loginUser == null) {
-            int userId = ds.getUserIdBySessionId(Session.sessionId);
-            ds.getUser(userId, new DataSource.LoadCallback<User>() {
-
-                @Override
-                public void onDataLoaded(User user) {
-                    Session.loginUser = user;
-                    view.onLoginComplate();
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-
-                }
-            });
-        } else {
-            view.onLoginComplate();
+            int userId = 1;
+            Session.loginUser = dao.getUser(userId);
         }
+        data.put("user", Session.loginUser);
+
+        Book book = dao.getBook(Session.loginUser.bookId);
+        data.put("book", book);
+
+        Map<String, Integer> statInfo = new HashMap<String, Integer>();
+        int doingCount = dao.getUserWordsCount(UserWord.TAG_DOING);
+        int doneCount = dao.getUserWordsCount(UserWord.TAG_DONE);
+        statInfo.put("doingCount", doingCount);
+        statInfo.put("doneCount", doneCount);
+
+        int bookDoingCount = dao.getBookWordsCount(UserWord.TAG_DOING);
+        int bookDoneCount = dao.getBookWordsCount(UserWord.TAG_DONE);
+        statInfo.put("bookDoingCount", bookDoingCount);
+        statInfo.put("bookDoneCount", bookDoneCount);
+
+        data.put("statInfo", statInfo);
+
+        return data;
     }
-
-    @Override
-    public void loadBook() {
-        if (Session.book == null) {
-            int bookId = Session.loginUser.bookId;
-            ds.getBook(bookId, new DataSource.LoadCallback<Book>() {
-
-                @Override
-                public void onDataLoaded(Book book) {
-                    Session.book = book;
-                    view.onLoadBookComplate();
-                }
-
-                @Override
-                public void onDataNotAvailable() {
-
-                }
-            });
-        } else {
-            view.onLoadBookComplate();
-        }
-    }
-
 }
