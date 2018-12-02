@@ -1,12 +1,12 @@
 package com.lucky.demo.data.source;
 
-import com.lucky.demo.data.Book;
-import com.lucky.demo.data.BookSetting;
-import com.lucky.demo.data.User;
-import com.lucky.demo.data.Word;
+
+import android.support.annotation.NonNull;
+
+import com.lucky.demo.data.room.RoomEntity.*;
 
 import java.util.List;
-import java.util.Map;
+
 
 /**
  * Created by qw on 18-11-29.
@@ -14,17 +14,25 @@ import java.util.Map;
 
 
 public interface DataSource {
-    User getUser(int userId);
+    void saveUser(@NonNull User user);
 
-    Book getBook(int bookId);
-    List<Book> getBookList(int userId);
+    void getUser(@NonNull int userId, @NonNull LoadCallback<User> callback);
 
-    Word getWord(int wordId);
-    List<Word> getWordList(int bookId);
-    List<Word> getWordList(int bookId,int tag);
-    List<Word> getWordList(int bookId,List<Integer> tags);
+    void getBook(@NonNull int bookId, @NonNull LoadCallback<Book> callback);
 
-    BookSetting getBookSetting(int userId, int bookId);
+    int getUserIdBySessionId(String sessionId);
 
-    Map<Integer,Integer> getBookWordTags(int userId,int bookId);
+    interface LoadCallback<T> {
+        void onDataLoaded(T obj);
+
+        void onDataNotAvailable();
+    }
+
+    interface LoadListCallback<T> {
+        void onDataLoaded(List<T> data);
+
+        void onDataNotAvailable();
+    }
+
+
 }

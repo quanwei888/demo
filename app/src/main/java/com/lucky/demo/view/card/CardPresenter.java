@@ -2,23 +2,25 @@ package com.lucky.demo.view.card;
 
 import android.support.annotation.NonNull;
 
+import com.lucky.demo.data.Task;
 import com.lucky.demo.data.Word;
-import com.lucky.demo.view.home.HomeContract;
+import com.lucky.demo.data.source.DataSource;
+import com.lucky.demo.data.source.Repository;
+import com.lucky.demo.view.BasePresenter;
 
 public class CardPresenter implements CardContract.Presenter {
-    HomeContract.View mHomeView;
+    CardContract.View view;
+    DataSource ds;
+    Task task;
 
-    public CardPresenter(@NonNull HomeContract.View homeView) {
-        mHomeView = homeView;
+    public CardPresenter(@NonNull CardContract.View view) {
+        this.view = view;
+        this.ds = Repository.getInstance(null, null);
     }
 
-    @Override
-    public Word getNextWord() {
-        return null;
-    }
 
     @Override
-    public Word getLastWord() {
+    public Word lastWord() {
         return null;
     }
 
@@ -27,18 +29,4 @@ public class CardPresenter implements CardContract.Presenter {
         return null;
     }
 
-    @Override
-    public Word getWord() {
-        return null;
-    }
-
-    @Override
-    public int getWordTag(int wordId) {
-        return 0;
-    }
-
-    @Override
-    public void setWordTag(int wordId, int tag) {
-
-    }
 }
