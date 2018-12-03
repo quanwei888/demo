@@ -4,28 +4,20 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label=""
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/icon"
+        android:label="砍词"
+        android:roundIcon="@drawable/icon"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".view.card.CardActivity"
-            android:parentActivityName=".view.nav.navActivity" />
         <activity android:name=".view.nav.navActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".view.booklist.BookListActivity" />
         <activity android:name=".view.main.MainActivity" />
         <activity android:name=".view.bookwords.BookWordsActivity" />
-        <activity
-            android:name=".view.login.LoginActivity"
-            android:label="@string/title_activity_login"
-            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

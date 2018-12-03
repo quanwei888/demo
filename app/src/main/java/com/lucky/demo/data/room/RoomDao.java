@@ -45,30 +45,6 @@ public interface RoomDao {
     @Query("SELECT * FROM Word WHERE word in (:words)")
     List<Word> getWord(List<String> words);
 
-
-    @Query("SELECT * FROM Mean WHERE word=:word")
-    List<Mean> getMeans(String word);
-
-    /********Mean表操作***/
-    @Insert
-    void insertMeans(Mean... means);
-
-    @Update
-    void updateMeans(Mean... means);
-
-    @Delete
-    void deleteMeans(Mean... means);
-
-    /********Example表操作***/
-    @Insert
-    void insertExamples(Example... examples);
-
-    @Update
-    void updateExamples(Example... examples);
-
-    @Delete
-    void deleteExamples(Example... examples);
-
     /********Book表操作***/
     @Insert
     void insertBooks(Book... books);

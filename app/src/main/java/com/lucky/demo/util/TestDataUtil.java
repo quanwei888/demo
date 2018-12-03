@@ -1,13 +1,19 @@
 package com.lucky.demo.util;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
 
 import com.lucky.demo.data.room.RoomDao;
-import com.lucky.demo.data.room.RoomDataSource;
 import com.lucky.demo.data.room.RoomDb;
-import com.lucky.demo.data.room.RoomEntity.*;
+import com.lucky.demo.data.room.RoomEntity.Book;
+import com.lucky.demo.data.room.RoomEntity.BookWord;
+import com.lucky.demo.data.room.RoomEntity.User;
+import com.lucky.demo.data.room.RoomEntity.UserWord;
+import com.lucky.demo.data.room.RoomEntity.Word;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 /**
@@ -60,25 +66,29 @@ public class TestDataUtil {
             word.word = "word_" + i;
             word.pt = "[pt" + i + "]";
             word.ptMp3 = "/path/to/a.mp3";
-            dao.insertWords(word);
 
             int meanCount = random.nextInt(3) + 2;
+            List<Map<String,String>> means = new ArrayList<Map<String,String>>();
             for (int j = 1; j < meanCount; j++) {
-                Mean mean = new Mean();
-                mean.word = "word_" + i;
-                mean.pos = "pos_" + j;
-                mean.value = "mean_" + j;
-                dao.insertMeans(mean);
+                Map<String,String> mean = new HashMap<String,String>();
+                mean.put("pos","pos_"+i);
+                mean.put("mean","value_"+i);
+                means.add(mean);
             }
+            word.means = means;
+
+
             int exampleCount = random.nextInt(5) + 2;
+            List<Map<String,String>> examples = new ArrayList<Map<String,String>>();
             for (int j = 1; j < exampleCount; j++) {
-                Example example = new Example();
-                example.word = "word_" + i;
-                example.en = "en_" + j;
-                example.cn = "中文_" + j;
-                example.mp3 = "/path/to/a.mp3";
-                dao.insertExamples(example);
+                Map<String,String> example = new HashMap<String,String>();
+                example.put("en","en_" + j);
+                example.put("cn","中文_" + j);
+                example.put("mp3","\"/path/to/a.mp3_" + j);
+                examples.add(example);
             }
+            word.examples = examples;
+            dao.insertWords(word);
         }
 
         //Book

@@ -2,11 +2,14 @@ package com.lucky.demo.data.room;
 
 import android.arch.persistence.room.Embedded;
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 import android.arch.persistence.room.Relation;
+import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by qw on 18-12-2.
@@ -32,29 +35,11 @@ public class RoomEntity {
         public String word;
         public String pt;
         public String ptMp3;
-    }
 
-    @Entity(tableName = "Mean")
-    public static class Mean {
-        @PrimaryKey(autoGenerate = true)
-        @NonNull
-        public int meanId;
-        public String word;
-        public String pos;
-        public String value;
-    }
-
-    @Entity(tableName = "Example")
-    public static class Example {
-        @PrimaryKey(autoGenerate = true)
-        @NonNull
-        public int exampleId;
-
-
-        public String word;
-        public String en;
-        public String cn;
-        public String mp3;
+        @TypeConverters(RoomConvert.class)
+        public List<Map<String,String>> means;
+        @TypeConverters(RoomConvert.class)
+        public List<Map<String,String>> examples;
     }
 
     @Entity(tableName = "Book")

@@ -1,4 +1,5 @@
 package com.lucky.demo.data;
 
-public class BookSetting {
+public class Repository {
+
 }

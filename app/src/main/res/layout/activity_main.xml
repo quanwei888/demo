@@ -8,7 +8,6 @@
         <variable
             name="data"
             type="java.util.Map" />
-
     </data>
 
     <RelativeLayout
