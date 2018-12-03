@@ -1,9 +1,11 @@
 package com.lucky.demo.view.main;
 
 import android.databinding.DataBindingUtil;
+import android.databinding.ViewDataBinding;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.lucky.demo.BR;
 import com.lucky.demo.R;
 import com.lucky.demo.data.room.RoomDb;
 import com.lucky.demo.data.room.RoomEntity.Book;
@@ -18,7 +20,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View {
     MainContract.Presenter presenter;
-    ActivityMainBinding bindding;
+    ViewDataBinding bindding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,8 +42,7 @@ public class MainActivity extends AppCompatActivity implements View {
 
     @Override
     public void onInitDataSuccess(Map<String, Object> data) {
-        bindding.setUser((User) data.get("user"));
-        bindding.setBook((Book) data.get("book"));
-        bindding.setStatInfo((Map<String, Integer>) data.get("statInfo"));
+        //bindding.setData(data);
+        bindding.setVariable(BR.data,data);
     }
 }

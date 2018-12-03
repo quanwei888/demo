@@ -50,18 +50,15 @@ public class MainPresenter implements Presenter {
         Book book = dao.getBook(Session.loginUser.bookId);
         data.put("book", book);
 
-        Map<String, Integer> statInfo = new HashMap<String, Integer>();
         int doingCount = dao.getUserWordsCount(UserWord.TAG_DOING);
         int doneCount = dao.getUserWordsCount(UserWord.TAG_DONE);
-        statInfo.put("doingCount", doingCount);
-        statInfo.put("doneCount", doneCount);
+        data.put("doingCount", doingCount);
+        data.put("doneCount", doneCount);
 
         int bookDoingCount = dao.getBookWordsCount(UserWord.TAG_DOING);
         int bookDoneCount = dao.getBookWordsCount(UserWord.TAG_DONE);
-        statInfo.put("bookDoingCount", bookDoingCount);
-        statInfo.put("bookDoneCount", bookDoneCount);
-
-        data.put("statInfo", statInfo);
+        data.put("bookDoingCount", bookDoingCount);
+        data.put("bookDoneCount", bookDoneCount);
 
         return data;
     }
