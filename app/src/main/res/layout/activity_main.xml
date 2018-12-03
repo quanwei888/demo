@@ -7,7 +7,7 @@
         <import type="com.lucky.demo.data.room.RoomEntity.Book"/>
         <variable
             name="data"
-            type="java.util.Map&lt;String,Object&gt;" />
+            type="java.util.Map" />
 
     </data>
 
