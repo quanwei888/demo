@@ -16,8 +16,9 @@
 
 package com.lucky.demo.view;
 
-public interface BaseView<T> {
+import java.util.Map;
 
-    void setPresenter(T presenter);
+public interface BaseView<T> {
+    void onDataReady(Map<String, Object> data);
 
 }

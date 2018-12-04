@@ -27,11 +27,11 @@ public class BookListPresenter implements BookListContract.Presenter {
     }
 
     @Override
-    public void start() {
+    public void prepareData() {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                view.onInitDataSuccess(initData());
+                view.onDataReady(initData());
             }
         };
 

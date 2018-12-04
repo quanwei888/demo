@@ -11,7 +11,6 @@ import java.util.Map;
 
 interface BookListContract {
     interface View extends BaseView<Presenter> {
-        void onInitDataSuccess(Map<String, Object> data);
     }
 
     interface Presenter extends BasePresenter {

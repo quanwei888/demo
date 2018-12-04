@@ -18,6 +18,6 @@ package com.lucky.demo.view;
 
 public interface BasePresenter {
 
-    void start();
+    void prepareData();
 
 }

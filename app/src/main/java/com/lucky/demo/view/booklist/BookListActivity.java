@@ -48,11 +48,6 @@ public class BookListActivity extends AppCompatActivity implements View {
     }
 
     @Override
-    public void setPresenter(Presenter presenter) {
-        this.presenter = presenter;
-    }
-
-    @Override
-    public void onInitDataSuccess(Map<String, Object> data) {
+    public void onDataReady(Map<String, Object> data) {
     }
 }

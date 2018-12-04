@@ -20,7 +20,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity implements View {
     MainContract.Presenter presenter;
-    ViewDataBinding bindding;
+    ActivityMainBinding bindding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,17 +32,12 @@ public class MainActivity extends AppCompatActivity implements View {
 
         presenter = new MainPresenter(new AppExecutors(),
                 this, this);
-        presenter.start();
+        presenter.prepareData();
     }
 
-    @Override
-    public void setPresenter(Presenter presenter) {
-        this.presenter = presenter;
-    }
 
     @Override
-    public void onInitDataSuccess(Map<String, Object> data) {
-        //bindding.setData(data);
-        bindding.setVariable(BR.data, data);
+    public void onDataReady(Map<String, Object> data) {
+        bindding.setData(data);
     }
 }

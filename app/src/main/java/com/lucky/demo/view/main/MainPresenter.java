@@ -29,18 +29,18 @@ public class MainPresenter implements Presenter {
     }
 
     @Override
-    public void start() {
+    public void prepareData() {
         Runnable runnable = new Runnable() {
             @Override
             public void run() {
-                view.onInitDataSuccess(initData());
+                view.onDataReady(getData());
             }
         };
 
         appExecutors.diskIO().execute(runnable);
     }
 
-    Map<String, Object> initData() {
+    Map<String, Object> getData() {
         Map<String, Object> data = new HashMap<String, Object>();
         if (Session.loginUser == null) {
             int userId = 1;
