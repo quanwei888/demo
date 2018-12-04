@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.lucky.demo.data.room.RoomEntity.User"/>
-        <import type="com.lucky.demo.data.room.RoomEntity.Book"/>
+
+        <import type="com.lucky.demo.data.room.RoomEntity.User" />
+
         <variable
             name="data"
             type="java.util.Map" />
@@ -20,6 +21,7 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="20dp">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -29,37 +31,25 @@
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{((Book)data.book).name}"
+                android:text="@{((User)data.user).bookName}"
                 tools:text="单词书书名" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(data.doneCount)}"
+                android:text="@{String.valueOf(((User)data.user).bookWordCount)}"
                 tools:text="单词书单词数" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(data.doneCount)}"
-                tools:text="已砍单词数" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{String.valueOf(data.doingCount)}"
-                tools:text="学习中单词数" />
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@{String.valueOf(data.bookDoneCount)}"
+                android:text="@{String.valueOf(((User)data.user).statDone)}"
                 tools:text="单词书-已砍单词数" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@{String.valueOf(data.bookDoingCount)}"
+                android:text="@{String.valueOf(((User)data.user).statDoing)}"
                 tools:text="单词书-学习中单词数" />
 
         </LinearLayout>

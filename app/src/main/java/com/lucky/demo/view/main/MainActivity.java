@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity implements View {
         TestDataUtil.initDataBase(this);
 
         presenter = new MainPresenter(new AppExecutors(),
-                RoomDb.getInstance(this).dao(), this);
+                this, this);
         presenter.start();
     }
 
@@ -43,6 +43,6 @@ public class MainActivity extends AppCompatActivity implements View {
     @Override
     public void onInitDataSuccess(Map<String, Object> data) {
         //bindding.setData(data);
-        bindding.setVariable(BR.data,data);
+        bindding.setVariable(BR.data, data);
     }
 }

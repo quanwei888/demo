@@ -18,12 +18,24 @@ import java.util.Map;
 public class RoomEntity {
     @Entity(tableName = "User")
     public static class User {
+        public static final int TAG_UNDO = 0;
+        public static final int TAG_DOING = 1;
+        public static final int TAG_DONE = 2;
+
         @PrimaryKey
         @NonNull
         public int userId;
         public String name;
         public String headPic;
         public int bookId = 0;
+        public String bookName;
+        public String bookPic;
+        public String bookDesc;
+        public int bookWordCount;
+
+        public int statUndo;
+        public int statDoing;
+        public int statDone;
 
     }
 
@@ -37,18 +49,12 @@ public class RoomEntity {
         public String ptMp3;
 
         @TypeConverters(RoomConvert.class)
-        public List<Map<String,String>> means;
+        public List<Map<String, String>> means;
         @TypeConverters(RoomConvert.class)
-        public List<Map<String,String>> examples;
-    }
+        public List<Map<String, String>> examples;
 
-    @Entity(tableName = "Book")
-    public static class Book {
-        @PrimaryKey
-        @NonNull
-        public int bookId;
-        public String name;
-        public int wordCount;
+        public int tag;
+        public int favor;
     }
 
     @Entity(tableName = "BookWord")
@@ -60,8 +66,18 @@ public class RoomEntity {
         public String word;
     }
 
+    @Entity(tableName = "Book")
+    public static class Book {
+        @PrimaryKey
+        @NonNull
+        public int bookId;
+        public String name;
+        public int wordCount;
+    }
+
     @Entity(tableName = "UserWord")
     public static class UserWord {
+        public static final int TAG_UNDO = 0;
         public static final int TAG_DOING = 1;
         public static final int TAG_DONE = 2;
 

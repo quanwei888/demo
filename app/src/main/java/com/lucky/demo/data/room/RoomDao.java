@@ -29,6 +29,7 @@ public interface RoomDao {
     @Query("SELECT * FROM User WHERE userId=:userId")
     User getUser(int userId);
 
+
     /********Word表操作***/
     @Insert
     void insertWords(Word... words);
@@ -84,4 +85,5 @@ public interface RoomDao {
 
     @Query("SELECT COUNT(1) FROM UserWord WHERE tag=:tag")
     int getUserWordsCount(int tag);
+
 }

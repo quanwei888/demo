@@ -1,6 +1,8 @@
 package com.lucky.demo.view.main;
 
-import com.lucky.demo.data.room.RoomDao;
+import android.content.Context;
+
+import com.lucky.demo.data.DataManager;
 import com.lucky.demo.data.room.RoomEntity.*;
 import com.lucky.demo.util.AppExecutors;
 import com.lucky.demo.util.Session;
@@ -17,12 +19,12 @@ import io.reactivex.annotations.NonNull;
 
 public class MainPresenter implements Presenter {
     final View view;
-    RoomDao dao;
+    DataManager dm;
     AppExecutors appExecutors;
 
-    public MainPresenter(AppExecutors appExecutors, @NonNull RoomDao dao, View view) {
+    public MainPresenter(AppExecutors appExecutors, @NonNull Context context, View view) {
         this.appExecutors = appExecutors;
-        this.dao = dao;
+        this.dm = DataManager.instance(context);
         this.view = view;
     }
 
@@ -42,22 +44,9 @@ public class MainPresenter implements Presenter {
         Map<String, Object> data = new HashMap<String, Object>();
         if (Session.loginUser == null) {
             int userId = 1;
-            Session.loginUser = dao.getUser(userId);
+            Session.loginUser = dm.getUser(userId);
         }
         data.put("user", Session.loginUser);
-
-        Book book = dao.getBook(Session.loginUser.bookId);
-        data.put("book", book);
-
-        int doingCount = dao.getUserWordsCount(UserWord.TAG_DOING);
-        int doneCount = dao.getUserWordsCount(UserWord.TAG_DONE);
-        data.put("doingCount", doingCount);
-        data.put("doneCount", doneCount);
-
-        int bookDoingCount = dao.getBookWordsCount(UserWord.TAG_DOING);
-        int bookDoneCount = dao.getBookWordsCount(UserWord.TAG_DONE);
-        data.put("bookDoingCount", bookDoingCount);
-        data.put("bookDoneCount", bookDoneCount);
 
         return data;
     }
